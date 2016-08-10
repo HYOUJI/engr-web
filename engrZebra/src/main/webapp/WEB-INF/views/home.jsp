@@ -6,7 +6,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<%@ tablib uri="http://www.springframework.org/tags" prefix="spring" %>
+	<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 
 	<!------- library ------->
 	<!-- style -->
@@ -25,14 +25,16 @@
 	<link rel="stylesheet" type="text/css"
 		href="https://fonts.googleapis.com/css?family=Francois+One"/>
 			
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 	
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"/>
-	
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		
 	<title>Home</title>
+	
 </head>
 
 <body>
+	
 	<!-- style -->
 	<style>
 		@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
@@ -53,6 +55,7 @@
 	<!-- Navigation Bar -->
 	<jsp:include page="topNavigator.jsp" flush="false"></jsp:include>
 	
+	<!-- Home -->
 	<h1 id="title" align="center" style="font-family: 'Anton', sans-serif; color: #FFFFFF;"> ZEBRA<br>
 		<p id="title_P_Tag" class="lead" style="font-family: 'Anton', sans-serif">
 			Section of the community to build healthy consumption culture
