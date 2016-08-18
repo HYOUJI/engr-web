@@ -6,6 +6,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
+	
 	<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 	
 	<!-- Latest compiled and minified CSS -->
@@ -32,20 +33,16 @@
 
 </head>
 
-<body>
-
-	<!---------------------------------네비게이션 바 -------------------------  -->
-	<jsp:include page="topNavigation.jsp" flush="false"></jsp:include>
-	
+<body>	
 	<style>
 		h1 {
 			padding: 100px;
 		}
 	</style>
 
-	<h1>로그인 요청을 했음.</h1>
-
-	<c:out value="${modelLoginMember}"></c:out>
-
+	<script type="text/javascript">
+		alert("로그인이 실패했습니다.");
+		location.href="/engrZebra";		
+	</script>
 </body>
 </html>

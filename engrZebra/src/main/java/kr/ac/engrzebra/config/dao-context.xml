@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
-		
+
 	<context:annotation-config></context:annotation-config>
 
-	<context:component-scan base-package="kr.ac.zebra.dao"></context:component-scan>
+	<context:component-scan base-package="kr.ac.enzebra.dao"></context:component-scan>
 
-	<context:property-placeholder
-		location="classpath:/kr/ac/engrzebra/props/jdbc.properties"/>
-	
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-		<property name="driverClassName" value="${jdbc.driverClassName}"/>
-		<property name="url" value="${jdbc.url}"/>
-		<property name="username" value="${jdbc.username}"/>
-		<property name="password" value="${jdbc.password}"/>
+ <!-- properties 파일 따로 뺄때 사용 -->
+<!--  <context:property-placeholder
+		location="classpath:/kr/ac/engrzebra/props/jdbc.properties" />-->	
+		
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/zebra?chracterEncoding=EUCKR" />
+		<property name="username" value="root" />
+		<property name="password" value="mysqlpassword" />
 	</bean>
-	
+
 </beans>

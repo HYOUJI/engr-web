@@ -8,7 +8,9 @@ import kr.ac.engrzebra.dto.Enterprise;
 import org.springframework.jdbc.core.RowMapper;
 
 public class EnterpriseMapper implements RowMapper<Enterprise>{
+	
 	public Enterprise mapRow(ResultSet rs, int rowNum) throws SQLException{
+		
 		Enterprise enterprise = new Enterprise();
 		
 		enterprise.setCompanyName(rs.getString("companyName"));
