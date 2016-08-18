@@ -8,30 +8,40 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-/**
- * Handles requests for the application home page.
- */
+//Handles requests for the application home page.
+ 
 @Controller
 public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
+	// Simply selects the home view to render by returning its name.
+	 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(HttpSession session) {
 		return "home";
 	}
 	
-	@RequestMapping("/topNavigator")
-	public String showTopMenuPage(){
-		return "topNavigator";
+	@RequestMapping("/topNavigation")
+	public String showTopMenunPage(){
+		return "topNavigation";
 	}
 	
-	@RequestMapping("/Search")
+	@RequestMapping("/search")
 	public String Search(){
-		return "Search";
+		return "search";
 	}
 	
+	/*
+	@RequestMapping("/bootstraptest")
+	public String showbootstraptestPage(){
+		return "bootstraptest";
+	}
+	
+	
+	@RequestMapping("/testdesign")
+	public String testdesign(){
+		return "testdesign";
+	}
+	*/
 }
