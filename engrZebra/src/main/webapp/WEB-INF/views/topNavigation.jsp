@@ -128,9 +128,14 @@
 	<title>Home</title>
 
 	<%
-		String rcv = (String) session.getAttribute("logOk");
-
-		if (rcv != null) { // 로그인 완료 상태
+		//1. 로그인 여부 체크
+		String rcv = (String) session.getAttribute("loginUser");
+	
+		//2. 사용자 구분
+		String user = (String)session.getAttribute("user");
+		
+		//3-1. 사용자가 기업인 경우
+		if (rcv != null && user.equals("enterprise")) { 	
 	%>
 
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -150,14 +155,12 @@
 			<div class="collapse navbar-collapse navbar-ex1-collapse">
 				<ul class="nav navbar-nav">
 					<!-- Hidden li included to remove active class from about link when scrolled up past about section -->
-					<li class="hidden"><a class="page-scroll" href="#page-top"></a></li>
-					
+					<li class="hidden"><a class="page-scroll" href="#page-top"></a></li>				
 					<li><a class="page-scroll" href="/engrZebra/">About Services</a></li>
 					<li><a class="page-scroll" href="/engrZebra/powerReviewer">Power Reviewer</a></li>
 					<li><a class="page-scroll" href="/engrZebra/PopularProduct?category=0">Product</a></li>
 					<li><a class="page-scroll" href="/engrZebra/OurProduct?filter=All">OurProduct</a></li>
-					<li><a class="page-scroll" href="/engrZebra/Management">Management</a></li>
-						
+					<li><a class="page-scroll" href="/engrZebra/Management">Management</a></li>					
 				</ul>
 				
 				<ul class="nav navbar-nav navbar-right">
@@ -165,8 +168,7 @@
 							<span class="glyphicon glyphicon-user"></span> 
 						 	<%=rcv%>
 						</a>
-					</li>
-							
+					</li>		
 					<li>
 						<a href="/engrZebra/logout">
 							<span class="glyphicon glyphicon-log-in"></span> 
@@ -174,14 +176,58 @@
 						</a>
 					</li>
 				</ul>
-	
 			</div>
-			<!-- /.navbar-collapse -->
 		</div>
-		<!-- /.container -->
 	</nav>
+	
 	<%
-		} else {// 로그인이 되지 않은 상태
+		//3-2. 사용자가 일반 사용자인 경우
+		} else if (rcv != null && user.equals("common")) { 	
+	
+	%>
+	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+		<div class="container">
+			<div class="navbar-header page-scroll">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target=".navbar-ex1-collapse">
+					<span class="sr-only">Toggle navigation</span> 
+					<span class="icon-bar"></span> 
+					<span class="icon-bar"></span> 
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand page-scroll" href="/engrZebra/" style="font-family: fantasy;">ZEBRA</a>
+			</div>
+	
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse navbar-ex1-collapse">
+				<ul class="nav navbar-nav">
+					<!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+					<li class="hidden"><a class="page-scroll" href="#page-top"></a></li>				
+					<li><a class="page-scroll" href="/engrZebra/">About Services</a></li>
+					<li><a class="page-scroll" href="/engrZebra/PopularProduct?category=0">Product & Purchase</a></li>	
+					<li><a class="page-scroll" href="/engrZebra/">My Page</a></li>				
+				</ul>
+				
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#" data-toggle="modal" data-target="#">
+							<span class="glyphicon glyphicon-user"></span> 
+						 	<%=rcv%>
+						</a>
+					</li>		
+					<li>
+						<a href="/engrZebra/logout">
+							<span class="glyphicon glyphicon-log-in"></span> 
+							Logout
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	
+	<%
+		// 로그인이 되지 않은 상태
+		} else {
 	%>
 	
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">

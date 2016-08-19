@@ -1,69 +1,83 @@
 package kr.ac.engrzebra.service;
 
-import kr.ac.engrzebra.dao.AppMemberDAO;
-import kr.ac.engrzebra.dao.EnterpriseDAO;
-import kr.ac.engrzebra.dto.Enterprise;
-import kr.ac.engrzebra.dto.Member;
-import lombok.Data;
+import kr.ac.engrzebra.dao.AppUserDAO;
+import kr.ac.engrzebra.dao.WebUserDAO;
+import kr.ac.engrzebra.dto.WebUser;
+import kr.ac.engrzebra.dto.AppUser;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+//WEB & APP Login Service
 @Service("loginService")
 public class LoginService {
 
-	private EnterpriseDAO enterpriseDAO;
-	private AppMemberDAO memberDAO;
+	private WebUserDAO webUserDAO;
+	private AppUserDAO appUserDAO;
 
-	@Autowired // DI 주입
-	public void setEnterpriseDAO(EnterpriseDAO enterpriseDAO) {
-		this.enterpriseDAO = enterpriseDAO;
+	@Autowired 
+	public void setWebUserDAO(WebUserDAO webUserDAO) {
+		this.webUserDAO = webUserDAO;
 	}
 
 	@Autowired
-	public void setMemberDAO(AppMemberDAO memberDAO) {
-		this.memberDAO = memberDAO;
+	public void setAppUserDAO(AppUserDAO appUserDAO) {
+		this.appUserDAO = appUserDAO;
 	}
 	
-	public Enterprise checkEnterprise(String temail, String tpassword) {
+	/* 웹 사용자 로그인 처리 */
+	public WebUser checkWebUser(String temail, String tpassword) {
 
-		Enterprise enterprise = enterpriseDAO.getEnterprise(temail);
+		//1. 이메일을 이용해 해당 유저를 가져온다
+		WebUser webUser = webUserDAO.getWebUser(temail);
+		
+		/* 2. user값을 이용해 어떤 사용자인지 판별 test */
+		//enterprise login test
+		if(webUser.getUser().equals("enterprise")){
+			System.out.println("기업 사용자");
+		}
+		//일반 사용자 
+		else if(webUser.getUser().equals("common")){
+			System.out.println("일반 사용자");
+		}
+		else System.out.println("user값이 없는 잘못된 사용자 입니다.");
 
-		if (enterprise == null) {
+		
+		//등록되지 않은 사용자
+		if (webUser == null) 
 			return null;
-		} else {
-			String dbpassword = enterprise.getPassword();
+		
+		//등록된 사용자
+		else {
+			String dbpassword = webUser.getPassword();
 
 			if (dbpassword.equals(tpassword)) {
-				return enterprise;
-			} else {
-				return null;
+				return webUser;
 			}
+			else 
+				return null;
 		}
 	}
 	
 	
-	//MOBILE - user
-	/*
-	@Autowired
-	public void setMemberDAO(AppMemberDAO memberDAO) {
-		this.memberDAO = memberDAO;
-	}
-	
-	public Member checkMember(String id, String password) {
+	/* 앱 사용자 로그인 처리 */
+	public AppUser checkAppUser(String email, String password) {
 
-		Member member = memberDAO.getMember(id);
-		if (member == null) {
+		AppUser appUser = appUserDAO.getAppUser(email);
+		
+		//등록되지 않은 사용자
+		if (appUser == null)
 			return null;
-		} else {
-			String dbpassword = member.getPassword();
-
-			if (dbpassword.equals(password)) {
-				return member;
-			} else {
-				return null;
+		
+		//등록된 사용자
+		else {
+			String dbpassword = appUser.getPassword();
+			
+			if (dbpassword.equals(password)){
+				return appUser;
 			}
+			else
+				return null;
 		}
-	}
-	*/
+	}	
 }
